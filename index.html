@@ -23,6 +23,26 @@ http://www.templatemo.com/tm-475-holiday
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      		<!-- jQuery -->
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+
+	<script type="text/javascript" src="js/roomRes.js"></script>	
+  	<script type="text/javascript" src="js/moment.js"></script>							<!-- moment.js -->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>					<!-- bootstrap js -->
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>	<!-- bootstrap date time picker js, http://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+<!--
+	<script src="js/froogaloop.js"></script>
+	<script src="js/jquery.fitvid.js"></script>
+-->
+   	<script type="text/javascript" src="js/templatemo-script.js"></script>      		<!-- Templatemo Script -->    
+
   </head>
   <body class="tm-gray-bg">
   	<!-- Header -->
@@ -41,6 +61,7 @@ http://www.templatemo.com/tm-475-holiday
 							<li><a href="index.html" class="active">Home</a></li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="contact.html">Contact</a></li>
+							<li><a href="">Account</a></li>
 						</ul>
 					</nav>		
 	  			</div>				
@@ -56,14 +77,14 @@ http://www.templatemo.com/tm-475-holiday
 		    <li>
 			    <div class="tm-banner-inner">
 					<h1 class="tm-banner-title">Find <span class="tm-yellow-text">The Best</span> Room</h1>
-					<p class="tm-banner-subtitle">For group study, interview, and more</p>
+					<p class="tm-banner-subtitle">For individual / group study, interview, and more</p>
 					<a href="#more" class="tm-banner-link">Learn More</a>	
 				</div>
 				<img src="img/banner-1.jpg" alt="Image" />	
 		    </li>
 		    <li>
 			    <div class="tm-banner-inner">
-					<h1 class="tm-banner-title">Booking <span class="tm-yellow-text">on-campus</span> rooms</h1>
+					<h1 class="tm-banner-title">Booking <span class="tm-yellow-text">on-campus</span> venues</h1>
 					<p class="tm-banner-subtitle">Made easy</p>
 					<a href="#more" class="tm-banner-link">Learn More</a>	
 				</div>
@@ -92,12 +113,12 @@ http://www.templatemo.com/tm-475-holiday
 					<div class="tab-content">
 					    <div role="tabpanel" class="tab-pane fade in active tm-white-bg" id="hotel">
 					    	<div class="tm-search-box effect2">
-								<form action="#" method="post" class="hotel-search-form">
+								<form class="js-form">
 									<div class="tm-form-inner">
 							          	<div class="form-group">
-							          		<label for="usr">Date:</label>
+							          		<label for="datetimepicker1">Date:</label>
 							                <div class='input-group date' id='datetimepicker1'>
-							                    <input type='text' class="form-control" placeholder="Date" />
+							                    <input data-format="yyyy-MM-dd" type="text" class="form-control" placeholder="Date" />
 							                    <span class="input-group-addon">
 							                        <span class="fa fa-calendar"></span>
 							                    </span>
@@ -105,8 +126,8 @@ http://www.templatemo.com/tm-475-holiday
 							            </div>
 							          	
 							            <div class="form-group margin-bottom-0">
-							                <label for="usr">Time: </label>
-							                <select class="form-control time">
+							                <label for="js-time">Time: </label>
+							                <select class="form-control time" id="start-time">
 							            	 	<option value="">-- From -- </option>
 							            	 	<option value="1">8AM</option>
 												<option value="2">9AM</option>
@@ -124,7 +145,7 @@ http://www.templatemo.com/tm-475-holiday
 												<option value="14">9PM</option>
 												<option value="15">10PM</option>
 											</select> 
-											<select class="form-control time">
+											<select class="form-control time" id="end-time">
 							            	 	<option value="">-- To -- </option>
 							            	 	<option value="16">8AM</option>
 												<option value="17">9AM</option>
@@ -145,7 +166,7 @@ http://www.templatemo.com/tm-475-holiday
 							            </div>
 							             <div class="form-group margin-bottom-0">
 							                <label for="usr">For who? </label>
-							                <select class="form-control">
+							                <select class="form-control" id="user">
 							            	 	<option value="">-- Select -- </option>
 							            	 	<option value="ind">Individual</option>
 												<option value="org">Organization</option>
@@ -153,7 +174,7 @@ http://www.templatemo.com/tm-475-holiday
 							            </div>
 							            <div class="form-group margin-bottom-0">
 							                <label for="usr">Room size:</label>
-							                <select class="form-control">
+							                <select class="form-control" id="room-size">
 							            	 	<option value="">-- Select -- </option>
 							            	 	<option value="small">Small</option>
 												<option value="medium">Medium</option>
@@ -163,16 +184,16 @@ http://www.templatemo.com/tm-475-holiday
 							            <div class="form-group margin-bottom-0">
 							                <label for="usr">Equipments:</label>
 							                <br>
-							               	<form action="">
-											  <input type="radio" name="gender" value="whiteboard"> Whiteboard<br>
-											  <input type="radio" name="gender" value="blackboard"> Blackboard<br>
-											  <input type="radio" name="gender" value="projector"> Projector<br>
-											  <input type="radio" name="gender" value="microphone"> Microphone<br>
-											</form>
+			
+											<input type="radio" name="equipment1" value="whiteboard"> Whiteboard<br>
+											<input type="radio" name="equipment2" value="blackboard"> Blackboard<br>
+											<input type="radio" name="equipment3" value="projector"> Projector<br>
+											<input type="radio" name="equipment4" value="microphone"> Microphone<br>
+											
 							            </div>
 									</div>							
 						            <div class="form-group tm-yellow-gradient-bg text-center">
-						            	<button type="submit" name="submit" class="tm-yellow-btn">Search</button>
+						            	<button id="js-submit" type="submit" name="submit" class="tm-yellow-btn">Search</button>
 						            </div>  
 								</form>
 							</div>
@@ -183,22 +204,20 @@ http://www.templatemo.com/tm-475-holiday
 
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
-					<img src="img/index-01.jpg" alt="image" class="img-responsive">
+					<img src="img/scc-4.jpg" alt="image" class="img-responsive">
 					<a href="#">
 						<div class="tm-green-gradient-bg tm-city-price-container">
-							<span>New York</span>
-							<span>$6,600</span>
+							<span>Student Community Center</span>
 						</div>	
 					</a>			
 				</div>				
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-right">
-					<img src="img/index-02.jpg" alt="image" class="img-responsive">
+					<img src="img/mondavi.jpg" alt="image" class="img-responsive">
 					<a href="#">
 						<div class="tm-red-gradient-bg tm-city-price-container">
-							<span>Paris</span>
-							<span>$4,200</span>
+							<span>Mondavi Center</span>
 						</div>	
 					</a>					
 				</div>				
@@ -277,7 +296,7 @@ http://www.templatemo.com/tm-475-holiday
 			<div class="row">
 				<div class="tm-section-header section-margin-top">
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>
-					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">Popular Packages</h2></div>
+					<div class="col-lg-4 col-md-6 col-sm-6"><h2 class="tm-section-title">Popular Space</h2></div>
 					<div class="col-lg-4 col-md-3 col-sm-3"><hr></div>	
 				</div>
 				<div class="col-lg-6">
@@ -352,29 +371,7 @@ http://www.templatemo.com/tm-475-holiday
 			</div>
 		</div>		
 	</footer>
-	<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-	<script>
-	  // Initialize Firebase
-	  var config = {
-	    apiKey: "AIzaSyBfh6Aq0_fdDtKFpJ9ff22NuCZyGG-nWBA",
-	    authDomain: "reservationdatabase.firebaseapp.com",
-	    databaseURL: "https://reservationdatabase.firebaseio.com",
-	    storageBucket: "reservationdatabase.appspot.com",
-	    messagingSenderId: "734908058678"
-	  };
-	  firebase.initializeApp(config);
-	</script>
-	<script type="text/javascript" src="js/roomRes.js"></script>
-	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      		<!-- jQuery -->
-  	<script type="text/javascript" src="js/moment.js"></script>							<!-- moment.js -->
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>					<!-- bootstrap js -->
-	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>	<!-- bootstrap date time picker js, http://eonasdan.github.io/bootstrap-datetimepicker/ -->
-	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<!--
-	<script src="js/froogaloop.js"></script>
-	<script src="js/jquery.fitvid.js"></script>
--->
-   	<script type="text/javascript" src="js/templatemo-script.js"></script>      		<!-- Templatemo Script -->
+
 	<script>
 		// HTML document is loaded. DOM is ready.
 		$(function() {

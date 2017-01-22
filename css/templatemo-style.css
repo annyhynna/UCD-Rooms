@@ -297,7 +297,7 @@ body { overflow-x: hidden; }
 	color: white;
 }
 
-.hotel-search-form .form-group { margin-bottom: 15px; }
+.js-form .form-group { margin-bottom: 15px; }
 
 /*Section 2, index.html */
 .section-margin-top { margin-top: 100px; }
@@ -671,7 +671,7 @@ hr { border-top: 1px solid #111010; }
 		width: 300px;
 		height: 388px;
 	}
-	.hotel-search-form .form-group { margin-bottom: 18px; }
+	.js-form .form-group { margin-bottom: 18px; }
 	.tm-home-box-2-description { padding-bottom: 15px; }
 	.tm-home-box-3 {
 		margin-left: auto;
@@ -735,7 +735,7 @@ hr { border-top: 1px solid #111010; }
 		vertical-align: top;
 	}
 	.tm-home-box-2-description.box-3 { width: 175px; }
-	.hotel-search-form .form-group { margin-bottom: 30px; }
+	.js-form .form-group { margin-bottom: 30px; }
 	.home-description {	margin: 40px auto 40px;	}
 	.tm-tours-box-1-link-left {	width: 65%;	}
 	.tm-tours-box-1-link-right { width: 35%; }
